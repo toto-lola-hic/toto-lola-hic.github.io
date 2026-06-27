@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>HIC.TOP - DEMINITER_TOTO_LOLA OFFICIEL !!!</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin:0; padding:0; }
+  html, body { height:100%; }
+  body {
+    background:#000;
+    color:#00FF41;
+    font-family:'VT323', monospace;
+    overflow-x:hidden;
+    padding:12px;
+    position:relative;
+    min-height:100vh;
+  }
+  #matrix {
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    z-index:0; opacity:0.35;
+  }
+  .window {
+    position:relative; z-index:10;
+    max-width:980px; margin:0 auto;
+    background:#000;
+    border:2px solid #00FF41;
+    box-shadow:0 0 20px #00FF41, inset 0 0 20px rgba(0,255,65,0.15), 0 0 60px rgba(0,255,65,0.2);
+    animation:flicker 4s infinite;
+  }
+  @keyframes flicker {
+    0%,100%{ box-shadow:0 0 20px #00FF41, inset 0 0 20px rgba(0,255,65,0.15); }
+    50%{ box-shadow:0 0 28px #00FF41, inset 0 0 25px rgba(0,255,65,0.25); }
+  }
+  .titlebar {
+    background:linear-gradient(90deg,#003300 0%,#006600 50%,#003300 100%);
+    border-bottom:2px solid #00FF41;
+    color:#00FF41; padding:6px 10px;
+    font-family:'Press Start 2P', monospace; font-size:10px;
+    display:flex; justify-content:space-between; align-items:center;
+    text-shadow:0 0 5px #00FF41;
+    letter-spacing:1px;
+  }
+  .titlebar-buttons { display:flex; gap:4px; }
+  .tbtn {
+    width:16px; height:14px; background:#c0c0c0;
+    border:1px solid #000; box-shadow:inset 1px 1px 0 #fff, inset -1px -1px 0 #808080;
+    font-size:10px; line-height:12px; text-align:center; color:#000;
+  }
+  .content { padding:18px; background:repeating-linear-gradient(0deg, rgba(0,255,65,0.03) 0px, transparent 2px); }
+  .glitch {
+    position:relative; text-align:center;
+    font-family:'Press Start 2P', monospace;
+    font-size:clamp(14px, 4.2vw, 28px);
+    color:#00FF41; margin:10px 0 8px;
+    text-shadow:0 0 3px #00FF41, 0 0 12px #00FF41, 0 0 30px #00FF41;
+    letter-spacing:1px; line-height:1.4;
+  }
+  .glitch::before, .glitch::after {
+    content:attr(data-text); position:absolute; left:0; top:0; width:100%; height:100%; overflow:hidden;
+  }
+  .glitch::before { left:-1.5px; text-shadow:1.5px 0 #ff00ea; clip-path:inset(0 0 60% 0); animation:gl1 2.3s infinite; }
+  .glitch::after { left:1.5px; text-shadow:-1.5px 0 #00e5ff; clip-path:inset(40% 0 0 0); animation:gl2 1.7s infinite; }
+  @keyframes gl1 { 0%{transform:translateX(0)} 20%{transform:translateX(-2px)} 40%{transform:translateX(1px)} 60%{transform:translateX(-1px)} 80%{transform:translateX(2px)} 100%{transform:translateX(0)}}
+  @keyframes gl2 { 0%{transform:translateX(0)} 25%{transform:translateX(2px)} 50%{transform:translateX(-1px)} 75%{transform:translateX(1px)} 100%{transform:translateX(0)}}
+  
+  .subheader {
+    text-align:center; font-size:clamp(16px,3.5vw,22px);
+    color:#00FF41; margin-bottom:8px; letter-spacing:3px;
+    text-shadow:0 0 8px #00FF41;
+  }
+  .marquee-iii {
+    text-align:center; margin:4px 0 18px; font-size:clamp(18px,4vw,26px);
+    background:#001800; border:1px dashed #00FF41; padding:4px;
+    box-shadow:inset 0 0 10px rgba(0,255,65,0.3);
+  }
+  .marquee-iii span { display:inline-block; margin:0 8px; }
+  .iaaaa {
+    color:#b6ff00; text-shadow:0 0 10px #b6ff00, 0 0 20px #00FF41;
+    animation:pulse 0.7s infinite alternate; transform-origin:center;
+    font-weight:bold;
+  }
+  @keyframes pulse { from{ transform:scale(1) } to{ transform:scale(1.25) } }
+
+  .main-grid { display:grid; grid-template-columns:1.4fr 1fr; gap:18px; align-items:start; }
+  @media(max-width:780px){ .main-grid{ grid-template-columns:1fr; } }
+
+  .panel {
+    background:#050805; border:2px solid #00FF41;
+    box-shadow:0 0 12px rgba(0,255,65,0.4), inset 0 0 8px rgba(0,255,65,0.15);
+    padding:10px;
+  }
+  .panel-title {
+    font-family:'Press Start 2P'; font-size:10px; color:#000;
+    background:#00FF41; padding:5px 6px; margin:-10px -10px 10px;
+    text-shadow:none; letter-spacing:1px;
+  }
+  .mines-grid {
+    display:grid; grid-template-columns:repeat(10,1fr); gap:3px;
+    background:#001a00; padding:8px; border:2px inset #003a00;
+    justify-content:center; max-width:320px; margin:0 auto;
+  }
+  .cell {
+    aspect-ratio:1/1; width:100%; max-width:28px;
+    background:#0033aa; background:linear-gradient(145deg,#004de6,#002b80);
+    border:2px solid; border-color:#6699ff #001a4d #001a4d #6699ff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Press Start 2P'; font-size:10px; color:#fff;
+    cursor:pointer; user-select:none; position:relative;
+    box-shadow:inset 0 0 3px rgba(255,255,255,0.2);
+    transition:transform 0.05s;
+  }
+  .cell:active{ transform:scale(0.94); }
+  .cell.closed:hover { filter:brightness(1.3); box-shadow:0 0 6px #00aaff; }
+  .cell.open {
+    background:#c0c0c0; background:linear-gradient(#d4d0c8,#c0c0c0);
+    border:1px solid; border-color:#808080 #fff #fff #808080;
+    box-shadow:inset 1px 1px 2px rgba(0,0,0,0.3);
+  }
+  .cell.bomb { background:#a00 !important; border-color:#f00 #400 #400 #f00 !important; animation:boomshake 0.3s; }
+  @keyframes boomshake{0%,100%{transform:translate(0)}25%{transform:translate(-1px,1px)}75%{transform:translate(1px,-1px)}}
+  .cell.flag::after{ content:"🚩"; font-size:12px; }
+  .cell[data-n="1"]{ color:#0000ff } .cell[data-n="2"]{ color:#007800 } .cell[data-n="3"]{ color:#ff0000 }
+  .cell[data-n="4"]{ color:#000080 } .cell[data-n="5"]{ color:#800000 } .cell[data-n="6"]{ color:#008080 }
+  .cell[data-n="7"]{ color:#000 } .cell[data-n="8"]{ color:#808080 }
+
+  .status-bar {
+    margin-top:8px; background:#000; border:1px solid #00FF41; padding:4px 6px;
+    font-size:16px; display:flex; justify-content:space-between; color:#00FF41;
+    box-shadow:inset 0 0 6px rgba(0,255,65,0.2);
+  }
+
+  .big-button {
+    width:100%; margin:14px 0; padding:16px 10px;
+    background:#00FF41; color:#000; font-family:'Press Start 2P'; font-size:clamp(11px,2.8vw,14px);
+    border:3px solid; border-color:#cfffca #006600 #006600 #cfffca;
+    box-shadow:0 0 18px #00FF41, inset 0 0 10px rgba(0,0,0,0.2), 3px 3px 0 #003b00;
+    cursor:pointer; text-shadow:0 0 2px #000; letter-spacing:1px;
+    transition:all 0.15s;
+  }
+  .big-button:hover { transform:translateY(-2px) scale(1.02); box-shadow:0 0 28px #00FF41, inset 0 0 12px rgba(0,0,0,0.3), 4px 4px 0 #003b00; filter:brightness(1.1); }
+  .big-button:active { transform:translateY(1px); border-color:#006600 #cfffca #cfffca #006600; box-shadow:0 0 12px #00FF41, inset 0 0 8px rgba(0,0,0,0.4); }
+
+  .audio-box {
+    background:#0a0a0a; border:2px ridge #808080; padding:8px;
+    display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:18px;
+  }
+  .audio-box label { color:#00FF41; text-shadow:0 0 5px #00FF41; flex:1 1 100%; }
+  .vb-btn {
+    background:#c0c0c0; color:#000; border:2px solid;
+    border-color:#ffffff #808080 #808080 #ffffff;
+    padding:6px 12px; font-family:'VT323'; font-size:18px; cursor:pointer;
+    box-shadow:1px 1px 0 #000; min-width:90px;
+  }
+  .vb-btn:active { border-color:#808080 #ffffff #ffffff #808080; transform:translate(1px,1px); box-shadow:none; }
+  .vb-btn.playing { background:#00FF41; border-color:#b6ffaa #006600 #006600 #b6ffaa; box-shadow:0 0 10px #00FF41; }
+
+  .right { display:flex; flex-direction:column; gap:12px; }
+  .label-box {
+    border:2px solid; padding:8px 10px; background:#050505;
+    font-size:18px; line-height:1.3; position:relative; overflow:hidden;
+  }
+  .label-box::before { content:""; position:absolute; top:0; left:-100%; width:60%; height:2px; background:linear-gradient(90deg,transparent,currentColor,transparent); animation:scan 3s infinite; }
+  @keyframes scan{ 0%{left:-100%} 100%{left:200%} }
+  .label-box.green { border-color:#00FF41; color:#00FF41; box-shadow:0 0 10px rgba(0,255,65,0.3); }
+  .label-box.red { border-color:#ff0040; color:#ff5577; box-shadow:0 0 10px rgba(255,0,64,0.3); }
+  .label-box.blue { border-color:#0088ff; color:#55bbff; box-shadow:0 0 10px rgba(0,136,255,0.3); }
+  .label-title { font-family:'Press Start 2P'; font-size:10px; margin-bottom:6px; opacity:0.9; }
+  .blink { animation:blinker 0.9s infinite; font-weight:bold; }
+  @keyframes blinker{ 50%{opacity:0.2} }
+  .boom { font-family:'Press Start 2P'; font-size:12px; animation:boompulse 0.6s infinite; }
+  @keyframes boompulse{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
+
+  .ascii {
+    background:#000; border:1px solid #00FF41; padding:10px; text-align:center;
+    color:#00FF41; font-size:16px; line-height:1.1; text-shadow:0 0 6px #00FF41;
+    box-shadow:inset 0 0 12px rgba(0,255,65,0.15);
+  }
+  .lola-bunny { color:#ff66cc; text-shadow:0 0 8px #ff66cc; animation:hue 3s infinite; }
+  @keyframes hue{ 0%{filter:hue-rotate(0)} 100%{filter:hue-rotate(360deg)} }
+
+  .footer {
+    border-top:2px solid #00FF41; padding:8px; text-align:center;
+    font-size:16px; color:#00aa33; background:#001400;
+    letter-spacing:2px; text-shadow:0 0 5px #00FF41;
+  }
+
+  /* VB6 beveled inset panels for mobile */
+  @media(max-width:390px){
+    body{ padding:6px; }
+    .content{ padding:12px; }
+    .cell{ max-width:26px; font-size:9px; }
+    .mines-grid{ gap:2px; padding:6px; }
+  }
+</style>
+</head>
+<body>
+<canvas id="matrix"></canvas>
+
+<div class="window">
+  <div class="titlebar">
+    <span>HIC.TOP - DEMINITER_TOTO_LOLA.EXE</span>
+    <div class="titlebar-buttons">
+      <div class="tbtn">_</div><div class="tbtn">□</div><div class="tbtn">X</div>
+    </div>
+  </div>
+  <div class="content">
+    <h1 class="glitch" data-text="IIIIIIIAAAAAAAAA !!! HIC.TOP !!!">IIIIIIIAAAAAAAAA !!! HIC.TOP !!!</h1>
+    <div class="subheader">DEMINITER_TOTO_LOLA - OFFICIEL</div>
+    
+    <div class="marquee-iii">
+      <span>III</span><span class="iaaaa">IAAAA</span><span>III</span><span class="iaaaa">IAAAA</span><span>III</span><span class="iaaaa">IAAAA</span>
+    </div>
+
+    <div class="main-grid">
+      <div class="left">
+        <div class="panel">
+          <div class="panel-title">> DEMINITER PREVIEW v6.66 VB6</div>
+          <div id="minesweeper" class="mines-grid"></div>
+          <div class="status-bar">
+            <span>MINES: <b id="mine-count">015</b></span>
+            <span>TIME: <b id="time">000</b></span>
+            <span id="status-msg">CLIQUE !!!</span>
+          </div>
+        </div>
+
+        <button id="download" class="big-button">▼ TÉLÉCHARGER DEMINITER.ZIP ▼</button>
+
+        <div class="audio-box">
+          <label>♪ QUAKE2_AMBIANCE.WAV [LOOP]</label>
+          <button id="ambient-toggle" class="vb-btn">PLAY</button>
+          <button id="command-play" class="vb-btn">command=play</button>
+          <button id="reset-game" class="vb-btn">RESET</button>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="label-box green">
+          <div class="label-title">LABEL 555</div>
+          <div>// VICTORY //</div>
+          <div class="blink">YOU WIN !!!</div>
+          <div>score=9999 | lola++</div>
+        </div>
+
+        <div class="label-box red">
+          <div class="label-title">LABEL 666</div>
+          <div>// BOOM //</div>
+          <div class="boom">*KABOOOM*</div>
+          <div>game_over=1 | oops</div>
+        </div>
+
+        <div class="label-box blue">
+          <div class="label-title">OOOOPS</div>
+          <div>"oups j'ai cliqué trop vite lol"</div>
+          <div>"DEMINITER c tro dur en fait"</div>
+          <div>- LOLA 2026</div>
+        </div>
+
+        <pre class="ascii">  (\_/)  
+ ( ^.^ ) 
+ /> ❤ >  <span class="lola-bunny">LOLA_BUNNY</span>
+  /   \  
+ HIC.TOP</pre>
+      </div>
+    </div>
+  </div>
+  <div class="footer">byyyyyzooox - LOLA_TURBO_BASIC_Dieu - 2026</div>
+</div>
+
+<script>
+// MATRIX RAIN 19:9 pattern
+const canvas = document.getElementById('matrix');
+const ctx = canvas.getContext('2d');
+let w, h, cols, drops;
+const chars = "19:01";
+function resize(){ w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight; cols=Math.floor(w/14); drops=Array(cols).fill(1).map(()=>Math.random()*-h); }
+resize(); window.addEventListener('resize', resize);
+function draw(){
+  ctx.fillStyle='rgba(0,0,0,0.07)'; ctx.fillRect(0,0,w,h);
+  ctx.fillStyle='#00FF41'; ctx.font='14px VT323'; ctx.shadowColor='#00FF41'; ctx.shadowBlur=8;
+  for(let i=0;i<drops.length;i++){
+    const text = chars[Math.floor(Math.random()*chars.length)];
+    ctx.fillText(text, i*14, drops[i]*14);
+    if(drops[i]*14 > h && Math.random()>0.975) drops[i]=0; drops[i]+=0.9;
+  }
+  ctx.shadowBlur=0;
+  requestAnimationFrame(draw);
+}
+draw();
+
+// WEB AUDIO
+let audioCtx, ambient = { src:null, gain:null, playing:false };
+function initAudio(){ if(!audioCtx) audioCtx = new (window.AudioContext||webkitAudioContext)(); }
+function playBeep(freq=800, dur=0.08, type='square'){
+  initAudio(); const o=audioCtx.createOscillator(); const g=audioCtx.createGain();
+  o.type=type; o.frequency.value=freq; g.gain.value=0.08;
+  o.connect(g); g.connect(audioCtx.destination); o.start(); g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime+dur); o.stop(audioCtx.currentTime+dur);
+}
+function toggleAmbient(){
+  initAudio();
+  const btn = document.getElementById('ambient-toggle');
+  if(!ambient.playing){
+    const bufferSize=audioCtx.sampleRate*3; const buffer=audioCtx.createBuffer(1,bufferSize,audioCtx.sampleRate);
+    const data=buffer.getChannelData(0); let last=0;
+    for(let i=0;i<bufferSize;i++){ const white=Math.random()*2-1; last=(last+0.02*white)/1.02; data[i]=last*0.8*Math.sin(i*0.0003); }
+    const src=audioCtx.createBufferSource(); src.buffer=buffer; src.loop=true;
+    const filter=audioCtx.createBiquadFilter(); filter.type='lowpass'; filter.frequency.value=380;
+    const gain=audioCtx.createGain(); gain.gain.value=0.12;
+    src.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination); src.start();
+    ambient={src, gain, playing:true}; btn.textContent='STOP'; btn.classList.add('playing');
+    // slow wobble
+    const lfo=audioCtx.createOscillator(); const lfoG=audioCtx.createGain(); lfo.frequency.value=0.1; lfoG.gain.value=80; lfo.connect(lfoG); lfoG.connect(filter.frequency); lfo.start();
+  } else {
+    ambient.src.stop(); ambient.playing=false; btn.textContent='PLAY'; btn.classList.remove('playing');
+  }
+}
+document.getElementById('ambient-toggle').onclick=toggleAmbient;
+document.getElementById('command-play').onclick=()=>{ playBeep(920,0.07); setTimeout(()=>playBeep(1320,0.09,'sawtooth'),90); setTimeout(()=>playBeep(780,0.12,'square'),210); };
+
+// MINESWEEPER
+const size=10, totalMines=15;
+let grid=[], firstClick=true, gameOver=false, timer=0, timerInt=null, flags=0;
+const minesEl=document.getElementById('minesweeper'), mineCountEl=document.getElementById('mine-count'), timeEl=document.getElementById('time'), statusMsg=document.getElementById('status-msg');
+
+function initGame(){
+  grid=[]; firstClick=true; gameOver=false; timer=0; flags=0; clearInterval(timerInt);
+  timeEl.textContent='000'; mineCountEl.textContent=String(totalMines).padStart(3,'0'); statusMsg.textContent='CLIQUE !!!'; statusMsg.style.color='#00FF41';
+  minesEl.innerHTML='';
+  for(let y=0;y<size;y++){ const row=[]; for(let x=0;x<size;x++){
+    const cell=document.createElement('div'); cell.className='cell closed'; cell.dataset.x=x; cell.dataset.y=y;
+    cell.addEventListener('click',()=>onClick(x,y)); cell.addEventListener('contextmenu',e=>{e.preventDefault(); onRight(x,y);});
+    minesEl.appendChild(cell); row.push({x,y,mine:false, revealed:false, flagged:false, num:0, el:cell});
+  } grid.push(row); }
+}
+function placeMines(sx,sy){
+  let placed=0; while(placed<totalMines){ const x=Math.floor(Math.random()*size), y=Math.floor(Math.random()*size);
+    if((Math.abs(x-sx)<=1 && Math.abs(y-sy)<=1) || grid[y][x].mine) continue; grid[y][x].mine=true; placed++;
+  }
+  for(let y=0;y<size;y++) for(let x=0;x<size;x++) if(!grid[y][x].mine){
+    let c=0; for(let dy=-1;dy<=1;dy++) for(let dx=-1;dx<=1;dx++){ const nx=x+dx, ny=y+dy; if(nx>=0&&nx<size&&ny>=0&&ny<size&&grid[ny][nx].mine) c++; } grid[y][x].num=c;
+  }
+}
+function startTimer(){ clearInterval(timerInt); timerInt=setInterval(()=>{ timer++; timeEl.textContent=String(timer).padStart(3,'0'); },1000); }
+function onClick(x,y){
+  if(gameOver) return; const cell=grid[y][x]; if(cell.flagged||cell.revealed) return;
+  if(firstClick){ placeMines(x,y); firstClick=false; startTimer(); playBeep(600,0.05); }
+  reveal(x,y);
+}
+function onRight(x,y){
+  if(gameOver||firstClick) return; const cell=grid[y][x]; if(cell.revealed) return;
+  cell.flagged=!cell.flagged; cell.el.classList.toggle('flag', cell.flagged); flags+=cell.flagged?1:-1;
+  mineCountEl.textContent=String(totalMines-flags).padStart(3,'0'); playBeep(400,0.04,'triangle');
+}
+function reveal(x,y){
+  const cell=grid[y][x]; if(cell.revealed||cell.flagged) return; cell.revealed=true; cell.el.classList.remove('closed'); cell.el.classList.add('open');
+  if(cell.mine){ cell.el.classList.add('bomb'); cell.el.textContent='💣'; endGame(false); playBeep(200,0.3,'sawtooth'); setTimeout(()=>playBeep(120,0.4,'sawtooth'),150); return; }
+  if(cell.num>0){ cell.el.textContent=cell.num; cell.el.dataset.n=cell.num; playBeep(700+cell.num*30,0.03); }
+  else { playBeep(520,0.02); for(let dy=-1;dy<=1;dy++) for(let dx=-1;dx<=1;dx++){ const nx=x+dx, ny=y+dy; if(nx>=0&&nx<size&&ny>=0&&ny<size) reveal(nx,ny); } }
+  checkWin();
+}
+function checkWin(){
+  let revealed=0; for(let r of grid) for(let c of r) if(c.revealed && !c.mine) revealed++;
+  if(revealed===size*size-totalMines) endGame(true);
+}
+function endGame(win){
+  gameOver=true; clearInterval(timerInt);
+  if(win){ statusMsg.textContent='LABEL 555 VICTORY !!!'; statusMsg.style.color='#00FF41'; document.querySelector('.label-box.green').style.animation='pulse 0.5s 3'; for(let i=0;i<5;i++) setTimeout(()=>playBeep(900+i*100,0.07),i*80); }
+  else { statusMsg.textContent='LABEL 666 BOOM !!!'; statusMsg.style.color='#ff0040'; grid.forEach(r=>r.forEach(c=>{ if(c.mine){ c.el.classList.add('open','bomb'); c.el.textContent='💥'; } })); }
+}
+document.getElementById('reset-game').onclick=()=>{ initGame(); playBeep(500,0.05); setTimeout(()=>playBeep(700,0.05),70); };
+initGame();
+
+// DOWNLOAD BUTTON
+document.getElementById('download').onclick = () => {
+  playBeep(1000,0.06); 
+  setTimeout(()=>playBeep(1400,0.08),100);
+  
+  // vrai fichier local
+  const a = document.createElement('a');
+  a.href = 'DEMINEUR_LOLA_TOTO_Setup.zip';
+  a.download = 'DEMINEUR_LOLA_TOTO_Setup.zip';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  statusMsg.textContent = 'TELECHARGEMENT OK !!!';
+  setTimeout(()=>statusMsg.textContent='CLIQUE !!!',2000);
+};
+
+// Konami easter
+let keys=[]; window.addEventListener('keydown',e=>{ keys.push(e.key); if(keys.slice(-5).join('')==='lolaa'){ document.body.style.filter='hue-rotate(90deg)'; playBeep(1500,0.2); setTimeout(()=>document.body.style.filter='',2000); }});
+</script>
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
+</body>
+</html>
